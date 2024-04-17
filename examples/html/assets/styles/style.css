@@ -1,0 +1,99 @@
+/* Reset default margin and padding */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set body font and background */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+/* Center content */
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 40px;
+  background-color: white;
+  border: 2px solid #ddd;
+}
+
+/* Style header */
+header {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+header img {
+  max-width: 100%;
+  height: auto;
+}
+
+header h1 {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  color: white;
+}
+
+/* Style main content */
+main section {
+  margin-bottom: 20px;
+}
+
+main section h2 {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+}
+
+main section p {
+  text-align: justify;
+  line-height: 1.6rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+main section figure img {
+  max-width: 100%;
+}
+
+
+/* Style navigation */
+nav {
+  text-align: center;
+  margin: 1rem 0;
+  padding: 2rem 0;
+  border-top: 2px solid #ddd;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav ul li:last-child {
+  margin-right: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: #ddd;
+  color: #fff;
+}
