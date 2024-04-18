@@ -9,7 +9,7 @@ JS features – if your runtime doesn't support them, adjust the code accordingl
 it to a version supporting those features.
 
 You can check if you have the required version installed by running `node --version` in
-your shell. If you don't, you can use a tool like `asdf` or `nvm` to install it.
+your shell. If you don't, you can use a tool like [`asdf`](https://asdf-vm.com) or [`nvm`](https://github.com/nvm-sh/nvm#readme) to install it.
 
 You can use either `yarn install` or `npm install` to install dependencies, lock files are
 provided for both package managers.
@@ -20,7 +20,7 @@ We will also use [`kramdown-prismic`](https://github.com/stormz/kramdown-prismic
 (conventional name for Ruby packages) to convert HTML into Prismic rich text format. To run
 it, you will need Ruby 2.6 or later – you can check if you have the required version
 installed by running `ruby --version` in your shell. If you don't, you can use a tool like
-`asdf` or `rbenv` to install it.
+[`asdf`](https://asdf-vm.com) or [`rbenv`](https://github.com/rbenv/rbenv#readme) to install it.
 
 Currently, support for the API V2 format used by the Migration API is available only as a
 [pull request](https://github.com/stormz/kramdown-prismic/pull/17). If you're not familiar
@@ -40,13 +40,13 @@ gem specific_install -l "http://github.com/prismicio/kramdown-prismic.git" -b "p
 gem uninstall kramdown-prismic
 ```
 
-There are other options, such as using `bundler` with a `Gemfile` and calling the command
+There are other options, such as using [`bundler`](https://bundler.io) with a `Gemfile` and calling the command
 with `bundle exec` or checking out the source, building the gem with `gem build` and installing
 the build result. Pick one that works best for you.
 
 ### Prismic repository setup
 
-Our example will be using a repetable custom type named `story` with the following fieldsś:
+Our example will be using a repetable custom type named `story` with the following fields:
 
 | Field name          | Field type           |
 | --------------------|----------------------|
@@ -76,7 +76,7 @@ To be able to interact with the Asset and Migration APIs you will need to prepar
   * the name of the repository you will be using.
 
 You can use the `.env.example` file as a template to create an `.env` file in the root
-of the repository and put your credentials here – the example code uses `dotenv` as not
+of the repository and put your credentials here – the example code uses [`dotenv`](https://github.com/motdotla/dotenv#dotenv-) as not
 to force you to specify those environment variables on each command.
 
 ## Exporting your data
@@ -85,18 +85,18 @@ Exporting data from an existing website depends a lot on the tools you used to c
 and as such explaining how to prepare data in your specific case is out of scope of this
 tutorial.
 
-In the interest of providing a worked example we will use a simple HTML website from the
+In the interest of providing a working example we will use a simple HTML website from the
 `examples/html` directory, which might be useful if your website can be exported in such
 a format.
 
 ## Parsing your data
 
-Once you have exported your website, you have to parse it into datastructures you can then
-use to re-crate the webpage as Prismic documents.
+Once you have exported your website, you have to parse it into data structures you can then
+use to re-create the webpage as Prismic documents.
 
 This process is also very specific to how the website is built. In the case of the example
 pages provided, an appropriate solution is to use a HTML parser and extract data from the
-document structure – a popular option is the `cheerio` library, wih a familiar jQuery-like
+document structure – a popular option is the [`cheerio` library](https://cheerio.js.org), wih a familiar jQuery-like
 interface. For other export formats, you will have to choose other libraries that are
 appropriate for that format.
 
@@ -159,9 +159,9 @@ The first step is finding all the files we want to import into Prismic. In case 
 already present on the computer – like our example – the simplest solution would be to use
 a use a globbing library, which will find all the files matching a specified pattern for
 you, without having to manually traverse the filesystem using `node:fs`. A popular option
-for that is the aptly named `glob` library.
+for that is the appropriatly named [`glob` library](https://www.npmjs.com/package/glob).
 
-Here's an excerpt from `./src/import/documents.mjs`, showing how we discover files:
+Here's an excerpt from `src/import/documents.mjs`, showing how we discover files:
 
 ```javascript
 import { pathToFileURL } from "node:url";
@@ -250,7 +250,7 @@ It is usually helpful to approach a problem by decomposing it into smaller piece
 we will first write a function that can process a single document, and then apply it to all
 documents.
 
-Here's an excerpt from `./src/examples/html/story.mjs` to show how such a function could
+Here's an excerpt from `src/examples/html/story.mjs` to show how such a function could
 be structured at a high level:
 
 ```javascript
@@ -382,7 +382,7 @@ migrating documents, it can be often useful to traverse the rich text content �
 example to find all referenced assets or remove unwanted elements.
 
 To facilitate that, we provide a `mapRichText` helper, that you can use to transform
-the rich text – you can read the full implementation in `./src/import/content.mjs`,
+the rich text – you can read the full implementation in `src/import/content.mjs`,
 but at a high level it will iterate over all the elements, apply a `span` mapping
 function on them, and then apply the `element` mapping function on the resulting
 element with updated spans.
@@ -494,13 +494,13 @@ As we mentioned in the overview, we can't include field content when importing d
 initially due to unresolved asset/document references and we can't import all documents
 at once, because we require main language document IDs for documents in alternate languages.
 
-To resolve this issue, the function to import the documents, will allow you to specify
-what types of documens you want to sync with this call.
+To resolve this issue, the function to import the documents will allow you to specify
+what types of documents you want to sync with this call.
 
-To import the documents to we will to make requests to the [Prismic Migration API](
+To import the documents we will make requests to the [Prismic Migration API](
 https://prismic.io/docs/migration-api-technical-reference). We will use the popular
-`axios` library to talk to it and `axios-rate-limit` to respect the rate limits of the
-API. You can consult the `./src/import/utlis.mjs` file to see how to configure the axios
+[`axios`](https://axios-http.com/) library to talk to it and [`axios-rate-limit`](https://github.com/aishek/axios-rate-limit#readme) to respect the rate limits of the
+API. You can consult the `src/import/utlis.mjs` file to see how to configure the axios
 client properly, below we will just import it from that file.
 
 As usual, we will first focus on importing a single document:
@@ -689,7 +689,7 @@ a single document case and then see how to apply it to multiple documents.
 How the document maps to assets depends entirely on the document structure. In our case, we
 have a `chapterIllustration` field that is an image and the `contents` field can also contain
 images nested in it's Prismic rich text. To find assets in the `contents` field we can reach
-for the `mapRichText` helper described above. To wit:
+for the `mapRichText` helper described above.
 
 ```javascript
 > var { mapRichText } = await import ("./src/import/content.mjs");
@@ -799,7 +799,7 @@ exists or alternatively hashing the asset and storing the hash in it's notes, so
 not re-upload an identical asset, even when retrying your migration.
 
 Uploading the asset is done by calling the `POST /assets` endpoint with the asset attached
-as a multipart HTTP form. To accomplish that, we can use the `form-data` library:
+as a multipart HTTP form. To accomplish that, we can use the [`form-data` library](https://github.com/form-data/form-data#readme):
 
 ```javascript
 > var path = await import ("node:path")
@@ -1042,7 +1042,7 @@ As you can see, we can now easily create functions updating a single field in do
 it would be handy to compose them together to handle all the fields of the document. One
 interesting option is to uses promises.
 
-While promises are usually used for processing data asynchronously (for example when data
+While promises are usually used for processing data asynchronously (for example with data
 over the network), it's not the only way they can be used. You can create an already resolved
 promise over a piece of sync data using `Promise.resolve` and then call the `then` method to
 chain data transformation on the subject of the promise.
@@ -1245,7 +1245,7 @@ We can now update our resolution functions to work with the rich text field reso
   }
 [Function: resolveStoryReferences]
 ```
-And now we can that it also properly resolves references in rich text fields.
+And now we can see that it also properly resolves references in rich text fields.
 
 ```javascript
 > (await processingState.then(resolveReferences(resolveStoryReferences))).documents[1].data
