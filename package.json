@@ -3,9 +3,11 @@
   "type": "module",
   "scripts": {
     "examples:html": "node ./src/examples/html/index.mjs",
-    "lockfile:sync": "npm install --package-lock"
+    "examples:update": "node ./src/examples/update/index.mjs",
+    "lockfile:sync": "npm install --package-lock-only"
   },
   "dependencies": {
+    "@prismicio/client": "^7.5.0",
     "axios": "^1.6.8",
     "axios-fetch-adapter": "^1.0.0",
     "axios-rate-limit": "^1.3.0",

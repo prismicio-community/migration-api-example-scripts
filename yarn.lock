@@ -19,6 +19,13 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@prismicio/client@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.npmjs.org/@prismicio/client/-/client-7.5.0.tgz"
+  integrity sha512-4gcW59r2/JF9hngd7HRTJ3dmOJ3+befegb7FQi3s5e5Eo4UBSDgq9ufh9d/pJ0yqsRpuPrjbib82uJBlFQf+rQ==
+  dependencies:
+    imgix-url-builder "^0.0.4"
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
@@ -253,6 +260,11 @@ htmlparser2@^8.0.1:
     domhandler "^5.0.3"
     domutils "^3.0.1"
     entities "^4.4.0"
+
+imgix-url-builder@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/imgix-url-builder/-/imgix-url-builder-0.0.4.tgz"
+  integrity sha512-JRLydfxGTTbSSOG82ewuCgnmw/CzIPzoDqpP3UYD7RE+QWS8ZZbpF87ZuRqtcbEKdxahRsExinuKRxPZVvukWA==
 
 is-fullwidth-code-point@^3.0.0:
   version "3.0.0"
