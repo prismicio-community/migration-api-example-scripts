@@ -2,9 +2,10 @@ import process from "node:process";
 import fs      from "node:fs/promises";
 import path    from "node:path";
 
-import axios     from "axios";
-import rateLimit from "axios-rate-limit";
-import dotenv    from "dotenv";
+import axios        from "axios";
+import rateLimit    from "axios-rate-limit";
+import dotenv       from "dotenv";
+import * as prismic from "@prismicio/client";
 
 
 // Load envvars from an optional .env file
@@ -13,9 +14,11 @@ dotenv.config();
 // Asset API credentials
 const repository             = process.env.PRISMIC_REPOSITORY;
 const prismicWriteApiToken   = process.env.PRISMIC_WRITE_API_TOKEN;
+const prismicContentApiToken = process.env.PRISMIC_CONTENT_API_TOKEN;
 const prismicMigrationApiKey = process.env.PRISMIC_MIGRATION_API_KEY;
 const migrationApiUrl        = process.env.PRISMIC_MIGRATION_API_BASE_URL || "https://migration.prismic.io";
 const assetApiUrl            = process.env.PRISMIC_ASSET_API_BASE_URL || "https://asset-api.prismic.io";
+const documentApiUrl         = process.env.PRISMIC_DOCUMENT_API_URL || `https://${repository}.cdn.prismic.io/api/v2`
 
 // Common headers for Write APIs
 const writeApiHeaders = {
@@ -45,6 +48,9 @@ export const assetApiClient = rateLimit(
   // Make only 1 request per 2.5s to avoid rate-limits
   { maxRequests: 1, perMilliseconds: 2500 }
 );
+
+// Client for the Document API
+export const documentApiClient = prismic.createClient(documentApiUrl);
 
 // State persistence helpers
 

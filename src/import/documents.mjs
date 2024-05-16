@@ -1,8 +1,7 @@
-import fs from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
 import { glob } from "glob";
-import { mapKeys, pick } from "lodash-es";
+import { pick } from "lodash-es";
 
 import { migrationApiClient } from "./utils.mjs";
 
@@ -26,7 +25,10 @@ export const mapDocuments = mapping =>
       processingState.documents.map(async document => ({  ...document, ...await mapping(document) }))
     );
     // Collect mapped documents into a `documentMap` keyed by their paths
-    const documentMap = new Map(documents.map(document => [ document.path.toString(), document ]));
+    const documentMap = new Map(
+      documents.map(document => document.path && [ document.path.toString(), document ])
+        .filter(Boolean)
+    );
 
     return {
       ...processingState,

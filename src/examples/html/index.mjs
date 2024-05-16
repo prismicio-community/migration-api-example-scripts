@@ -11,21 +11,21 @@ import * as story from "./story.mjs";
 
 const documents = await findDocuments("examples/html/**/*.html")
   .then(mapDocuments(story.fromHtml))
-  .then(syncWithMigrationRelease({ includeFields: false, onlyLanguages: [ "en-gb" ] }))
-  .then(assignAlternateLanguages({ mainLanguage: "en-gb" }))
+  .then(syncWithMigrationRelease({ includeFields: false, onlyLanguages: [ "en-us" ] }))
+  .then(assignAlternateLanguages({ mainLanguage: "en-us" }))
   .then(syncWithMigrationRelease({ includeFields: false }))
   .then(findAssets(story.findAssets))
   .then(syncWithMediaLibrary)
   .then(resolveReferences(story.resolveReferences))
   .then(syncWithMigrationRelease());
 
-// // If you want to save intermediate processing steps (e.g. to resume afte a failure)
+// If you want to save intermediate processing steps (e.g. to resume after a failure)
 // const documents = await findDocuments("examples/html/**/*.html")
 //   .then(mapDocuments(story.fromHtml))
 //   .then(dumpState("documents.json"))
-//   .then(syncWithMigrationRelease({ includeFields: false, onlyLanguages: [ "en-gb" ] }))
+//   .then(syncWithMigrationRelease({ includeFields: false, onlyLanguages: [ "en-us" ] }))
 //   .then(dumpState("with-en-document-ids.json"))
-//   .then(assignAlternateLanguages({ mainLanguage: "en-gb" }))
+//   .then(assignAlternateLanguages({ mainLanguage: "en-us" }))
 //   .then(dumpState("with-alternate-languages.json"))
 //   .then(syncWithMigrationRelease({ includeFields: false }))
 //   .then(dumpState("with-all-document-ids.json"))
@@ -39,7 +39,7 @@ const documents = await findDocuments("examples/html/**/*.html")
 //   .then(dumpState("with-final-documents.json"))
 
 
-// // If you want to try resuming from a latter step, you could try doing this:
+// If you want to try resuming from a latter step, you could try doing this:
 // const documents = await readState("with-uploaded-assets.json")
 //   .then(resolveReferences(resolveReferencesForStory))
 //   .then(dumpState("with-references-resolved.json"))
