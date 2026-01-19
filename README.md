@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repository is an archive. [Powerful tooling and guides are now available to assist you in your migration endeavor.](https://prismic.io/docs/migration)
+
 # Migration API examples
 
 ## Prerequisites
